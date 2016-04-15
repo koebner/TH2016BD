@@ -2,13 +2,12 @@
 <?php
 include_once 'conecta.php';//conecto a mi base de datos
 //Condicional para borrar en BD
-if (isset($_GET[id_borra]))
+if (isset($_GET['id_borra']))
  {
   $sql_sent = "DELETE FROM usuarios WHERE id_user=".$_GET['id_borra'];//un string para enviar a SQL , borramos datos con un id (sentencia completa)
   mysqli_query($db_server,$sql_sent);//Manda consulta por medio de una variable
-
+ header("location: $_SERVER[PHP_SELF]");
 }
-
  ?>
 <html>
   <head>
@@ -16,20 +15,21 @@ if (isset($_GET[id_borra]))
     <title>Datos de Telmex2016</title>
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css" >
-  </head>
-  <body>
-    <script type="text/javascript">
-      function edita_dato (id){
+    <script type="text/javascript">//se crea dos funciuones para enviar datos tanto para borrar como para editar
+      function edita_dato(id){
         if (confirm('Estas seguro de hacer un cambio?')) {
-          windows.location.href='editardato.php?id_edita='+id;
+          window.location.href='editadato.php?edita_id='+id;
         }
       }
-      function borra_dato (id){
+      function borra_dato(id){
         if (confirm('Estas seguro de borrar el dato?')) {
-          windows.location.href='index.php?id_borra='+id;
+          window.location.href='index.php?id_borra='+id;
+
         }
       }
     </script>
+  </head>
+  <body>
     <div id="cabecera">
       <div id="contenido">
         <label>Sistema para registrar Usuarios</label>
@@ -69,10 +69,10 @@ if (isset($_GET[id_borra]))
                   <?php echo "$fila[3]"; ?>
                 </td>
                 <td align="center">
-                  <a href="javascript:edita_dato('<?php echo[0]; ?>')"><img src="https://image.freepik.com/iconos-gratis/pagina-de-edicion_318-33138.jpg"  height="30px" width="30px"/></a>
+                  <a href="javascript:edita_dato('<?php echo $fila[0]; ?>')"><img src="https://image.freepik.com/iconos-gratis/pagina-de-edicion_318-33138.jpg"  height="30px" width="30px"/></a>
                 </td>
                 <td align="center">
-                  <a href="javascript:borra_dato('<?php echo[0]; ?>')"><img src="https://image.freepik.com/iconos-gratis/boton-eliminar_318-77600.png"  height="30px" width="30px"/></a>
+                  <a href="javascript:borra_dato('<?php echo $fila[0]; ?>')"><img src="https://image.freepik.com/iconos-gratis/boton-eliminar_318-77600.png"  height="30px" width="30px"/></a>
                 </td>
               </tr>
               <?php
@@ -83,5 +83,6 @@ if (isset($_GET[id_borra]))
 
       </div>
     </div>
+
   </body>
 </html>

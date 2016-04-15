@@ -36,6 +36,7 @@ else {
     <meta charset="utf-8">
     <title>Agregar datos</title>
     <link rel="stylesheet" href="estilo.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css" >
   </head>
   <body>
 <div id="cabecera">
